@@ -1,0 +1,89 @@
+#Distributed code settings.
+gpu_ids: '0,1'
+#dist_backend: 'nccl'
+#master_addr: 'localhost'
+#master_port: '12344'
+dist_url: 'env://'
+device: 'cuda'
+num_workers: 8
+world_size: 1
+local_rank: 0
+use_deterministic_algorithms: False
+
+#Network structures and dataset
+method: 'augmix'
+dataset: 'imagenet'
+arch: 'resnet50'
+weights: 'IMAGENET1K_V1'
+
+platform: 'tv'
+num_classes: 1000
+pretrained: False
+
+#training receipe
+train_crop_size: 224
+test_resize_size: 224
+test_crop_size: 224
+mean: [0.485, 0.456, 0.406]
+std: [0.229,0.224,0.225]
+batch_size: 256
+start_epoch: 0
+epochs: 90
+label_smoothing: 0.0 
+ckpt_freq: 30
+print_freq: 10
+
+#optimizer and scheduler
+opt: 'sgd' #sgd, rmsprop, adamw
+lr: 0.4
+momentum: 0.9
+weight_decay: 0.0001
+norm_weight_decay: null
+lr_scheduler: 'cosineannealinglr' #steplr, cosineannealinglr, exponentiallr
+lr_step_size: 30 #step_lr
+lr_gamma: 0.1
+lr_min: 0.0
+lr_warmup_method: 'linear' #constant and linear
+lr_warmup_epochs: 5
+lr_warmup_decay: 0.01
+clip_grad_norm: 1.0
+#mixed precision training
+amp: True
+#enable tracking Exponential Moving Average of model parameters
+model_ema: False
+model_ema_steps: 32
+model_ema_decay: 0.99998
+
+#preprocessing
+interpolation: 'bilinear'
+auto_augment: 'augmix'
+random_erase_prob: 0.0 #float
+augmix_severity: 3 #
+ra_magnitude: null
+ra_sampler: null #repeated augmentation true or false
+ra_reps: 3 #(int) number of repetitions for Repeated Augmentation
+mixup_alpha: 0.0 #float
+cutmix_alpha: 0.0 #float
+
+#Distributed training and testing
+
+sync_bn: True
+bias_weight_decay: null #float
+transformer_embedding_decay: null #float
+
+#Path
+# Absolute path to the checkpoint (.pth) for resuming training (e.g., 'weights/epoch_10.pth')
+resume_path: null
+# Absolute path to the trained model weight for evaluation/testing purposes
+model_path: null
+store_root: 'results/'
+# Absolute path to the ImageNet-C dataset (e.g., '/home/user/data/ImageNet-C')
+imagenet_path: 'ENTER_YOUR_IMAGENET_C_DATASET_PATH_HERE'
+# Absolute path to the t-ImageNet-C dataset
+t_imagenet_path: 'ENTER_YOUR_T_IMAGENET_C_DATASET_PATH_HERE'
+# Absolute path to the ImageNet100 variants dataset
+imagenet100_path: 'ENTER_YOUR_IMAGENET100_VARIANTS_V2_DATASET_PATH_HERE'
+
+# Set to False for normal training + validation. 
+# Set to True if you want to bypass training and ONLY run testing/evaluation on OOD datasets.
+only_test_ood: False
