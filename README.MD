@@ -75,5 +75,19 @@ model_path: "path/to/your/downloaded/resnet50_sd.pth"
 test_only_ood: True
 ```
 
+---
+
+## 🖊️ Citation
+
+If you find our work or code useful for your research, please consider giving a ⭐ to this repository and citing our paper:
+
+```bibtex
+@inproceedings{yangsuppress,
+  title={Suppress and Diversify: Refining Robust Pathways for Corruption Robustness},
+  author={Yang, Jiangang and Shi, Wenhui and Xu, Xiaoran and Chong, Wenyue and Luo, Luqing and Xing, Jing and Liu, Jian},
+  booktitle={Forty-third International Conference on Machine Learning},
+  year={2026}
+}
+
 
 
